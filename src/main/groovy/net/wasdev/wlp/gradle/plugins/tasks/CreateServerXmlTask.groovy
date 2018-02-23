@@ -7,6 +7,7 @@ import org.gradle.api.tasks.TaskAction
 
 class CreateServerXmlTask extends AbstractServerTask {
 
+  @Input
   String configFilename = "server.xml"
 
   @Input

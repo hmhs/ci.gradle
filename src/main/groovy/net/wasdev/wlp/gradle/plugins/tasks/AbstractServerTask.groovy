@@ -28,6 +28,7 @@ import org.gradle.api.Task
 import org.gradle.api.plugins.WarPlugin
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.bundling.War
+import org.gradle.plugins.ear.Ear
 import org.gradle.plugins.ear.EarPlugin
 
 import static net.wasdev.wlp.gradle.plugins.Liberty.TASK_CORE_EAR
@@ -243,15 +244,4 @@ abstract class AbstractServerTask extends AbstractTask implements ILibertyDefini
             printer.print( libertyPluginConfig )
         }
     }
-    protected String getPackagingType() throws Exception{
-      if (project.plugins.hasPlugin(TASK_CORE_WAR) || !project.tasks.withType(WarPlugin).isEmpty()) {
-          return TASK_CORE_WAR
-      }
-      else if (project.plugins.hasPlugin(TASK_CORE_EAR) || !project.tasks.withType(EarPlugin).isEmpty()) {
-          return TASK_CORE_EAR
-      }
-      else {
-          throw new GradleException("Archive path not found. Supported formats are jar, war, and ear.")
-      }
-  }
 }

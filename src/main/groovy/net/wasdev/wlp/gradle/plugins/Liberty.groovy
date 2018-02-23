@@ -54,6 +54,8 @@ class Liberty extends LibertyTrait implements Plugin<Project> {
   public static final String LIBERTY_DEPLOY_CONFIGURATION = "libertyDeploy"
   public static final String LIBERTY_DEPLOY_APP_CONFIGURATION = "libertyDeployApp"
 
+  public static final String TASK_CORE_BUILD = "build"
+  public static final String TASK_CORE_CLEAN = "clean"
   public static final String TASK_CORE_EAR = "ear"
   public static final String TASK_CORE_WAR = "war"
 
@@ -167,6 +169,7 @@ class Liberty extends LibertyTrait implements Plugin<Project> {
   }
 
   void setTaskWorkflow() {
+
     a_dependsOn_b(project, TASK_COMPILE_JSP, TASK_INSTALL_LIBERTY)
     a_dependsOn_b(project, TASK_COMPILE_JSP, 'compileJava')
 
@@ -201,6 +204,8 @@ class Liberty extends LibertyTrait implements Plugin<Project> {
     a_dependsOn_b(project, TASK_DEPLOY, TASK_DEPLOY_CONFIG)
     a_dependsOn_b(project, TASK_DEPLOY, TASK_DEPLOY_LIBERTY)
     a_dependsOn_b(project, TASK_DEPLOY, TASK_DEPLOY_LOCAL)
+
+    a_dependsOn_b(project, TASK_DEPLOY_LOCAL, TASK_CORE_BUILD)
 
     a_mustRunAfter_b(project, TASK_DEPLOY_CONFIG, TASK_LIBERTY_START)
     a_mustRunAfter_b(project, TASK_DEPLOY_LIBERTY, TASK_LIBERTY_START)

@@ -42,7 +42,6 @@ class StartTask extends AbstractServerTask {
             serverTask.initTask()
 
             long timeout = server.verifyAppStartTimeout * 1000
-            long endTime = System.currentTimeMillis() + timeout;
 
             Set<String> appsToVerify = getAppNamesFromServerXml()
 

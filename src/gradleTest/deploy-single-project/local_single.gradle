@@ -1,0 +1,47 @@
+apply plugin: 'liberty'
+apply plugin: "war"
+ext {
+  // Liberty server properties
+  libertyVersion = project.property("libertyVersion")
+  wlpServerName = 'libertyOnline'
+}
+
+liberty {
+  install {
+    runtimeUrl = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+  }
+
+  server{
+    name = wlpServerName
+
+    packageLiberty {
+      include = 'minify'
+      os='Linux'
+    }
+
+    verifyAppStartTimeout = 45
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.apache.cxf:cxf-rt-rs-client:3.1.1'
+  testCompile 'org.glassfish:javax.json:1.0.4'
+  providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+}
+
+task ('runGradleTest') {
+  dependsOn 'clean', 'deploy'
+  finalizedBy 'libertyStop'
+
+  doLast {
+    def file = new File(buildDir, "/wlp/usr/servers/${wlpServerName}/dropins/${project.name}.war")
+
+    assert file.exists() : "${project.name}.war not found"
+    assert file.canRead() : "${project.name}.war cannot be read"
+  }
+}

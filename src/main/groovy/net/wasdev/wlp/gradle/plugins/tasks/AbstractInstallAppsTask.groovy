@@ -15,8 +15,6 @@
  */
 package net.wasdev.wlp.gradle.plugins.tasks
 
-import net.wasdev.wlp.gradle.plugins.tasks.AbstractServerTask
-import org.gradle.api.Task
 import org.gradle.api.tasks.OutputDirectory
 
 import java.nio.file.Paths

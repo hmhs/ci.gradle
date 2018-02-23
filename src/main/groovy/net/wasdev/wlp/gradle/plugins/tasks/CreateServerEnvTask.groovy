@@ -1,5 +1,6 @@
 package net.wasdev.wlp.gradle.plugins.tasks
 
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
@@ -7,6 +8,7 @@ import org.gradle.api.tasks.TaskAction
 
 class CreateServerEnvTask extends AbstractServerTask {
 
+  @Input
   String configFilename = "server.env"
 
   @OutputFile

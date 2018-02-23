@@ -48,8 +48,9 @@ class LibertyIntstallController {
       checker << it
     }
 
+    project.logger.info("Server status return: " + checker)
     for (String s in checker) {
-      if (s.contains("Server ${project.liberty.server.name} is running.")){
+      if (s.contains("Server ${project.liberty.server.name} is running")){
         return true
       }
     }
@@ -58,7 +59,7 @@ class LibertyIntstallController {
   }
 
   private static def serverStatusWorker(Project project) {
-    def status_process = new ProcessBuilder(buildCommand(project, "status"))
+    return new ProcessBuilder(buildCommand(project, "status"))
         .redirectErrorStream(true).start()
   }
 }

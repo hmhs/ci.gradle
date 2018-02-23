@@ -1,0 +1,48 @@
+apply plugin: 'liberty'
+
+ext {
+  // Liberty server properties
+  libertyVersion = project.property("libertyVersion")
+  wlpServerName = 'libertyOnline'
+}
+
+liberty {
+  install {
+    runtimeUrl = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+  }
+
+  server{
+    name = wlpServerName
+    deploy {
+      file = "${projectDir}/war/test-war.war"
+    }
+
+    deploy {
+      file = "${projectDir}/war/test-war2.war"
+    }
+
+    packageLiberty {
+      include = 'minify'
+      os='Linux'
+    }
+
+    verifyAppStartTimeout = 45
+  }
+}
+
+task ('runGradleTest') {
+  dependsOn 'clean', 'deploy'
+  finalizedBy 'libertyStop'
+
+  doLast {
+    def file1 = new File(buildDir, "/wlp/usr/servers/${wlpServerName}/dropins/test-war.war")
+
+    assert file1.exists() : "test-war.war not found"
+    assert file1.canRead() : "test-war.war cannot be read"
+
+    def file2 = new File(buildDir, "/wlp/usr/servers/${wlpServerName}/dropins/test-war2.war")
+
+    assert file2.exists() : "test-war.war not found"
+    assert file2.canRead() : "test-war.war cannot be read"
+  }
+}
