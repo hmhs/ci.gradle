@@ -69,7 +69,7 @@ installApps.dependsOn tasks.withType(War)
 
 liberty {
     install {
-        runtimeUrl = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+        runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/17.0.0.2/wlp-webProfile7-17.0.0.2.zip"
     }
     server{
         name = wlpServerName
