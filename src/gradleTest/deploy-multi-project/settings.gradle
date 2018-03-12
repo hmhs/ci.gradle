@@ -1,2 +1,5 @@
 rootProject.name = "deploy-multi-project"
+<<<<<<< HEAD
 include 'app-ejb', 'app-war', 'app-liberty'
+=======
+>>>>>>> hmhs_local
