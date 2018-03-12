@@ -2,13 +2,14 @@
 ext {
     // Liberty server properties
     libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
 }
 
 apply plugin: 'liberty'
 
 liberty {
     install {
-        runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+        runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
     }
 
     server{

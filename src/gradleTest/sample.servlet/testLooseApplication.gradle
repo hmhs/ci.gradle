@@ -25,6 +25,8 @@ compileJava.options.encoding = 'UTF-8'
 
 ext {
     libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
+
     // Liberty server properties
     wlpServerName = 'LibertyProjectServer'
     serverDirectory = "${project.buildDir}/wlp/usr/servers/${wlpServerName}"
@@ -38,7 +40,7 @@ ext {
 
 liberty {
     install {
-        runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+        runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
     }
     server{
         configFile = file("src/main/libertyConfig/server-apps-test.xml")

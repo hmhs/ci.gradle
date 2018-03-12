@@ -21,6 +21,7 @@ ext {
 
     warContext = 'jpaApp'
     libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
 }
 
 war {
@@ -42,6 +43,10 @@ liberty {
         }
         packageLiberty {
             archive = 'testPackage.zip'
+        }
+
+        install {
+            runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
         }
      }
 }

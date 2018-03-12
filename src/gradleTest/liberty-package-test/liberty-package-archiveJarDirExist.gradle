@@ -4,11 +4,13 @@ ext {
     // Liberty server properties
     wlpServerName = 'LibertyProjectServer'
     libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
+
 }
 
 liberty {
     install {
-        runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+        runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
     }
 
     server{

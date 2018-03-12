@@ -1,12 +1,6 @@
 group = 'liberty.gradle'
 version = '1'
 
-ext {
-    libertyVersion = project.property("libertyVersion")
-    testServerHttpPort = 9080
-    testServerHttpsPort = 9443
-}
-
 apply plugin: 'maven'
 apply plugin: 'war'
 apply plugin: 'liberty'
@@ -17,6 +11,11 @@ targetCompatibility = 1.7
 compileJava.options.encoding = 'UTF-8'
 
 ext {
+    libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
+    testServerHttpPort = 9080
+    testServerHttpsPort = 9443
+
     // Liberty server properties
     wlpServerName = 'LibertyProjectServer'
     serverDirectory = "${project.buildDir}/wlp/usr/servers/${wlpServerName}"
@@ -32,7 +31,7 @@ ext {
 
 liberty {
     install {
-        runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+        runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
     }
     server{
         name = 'libertyOnline'

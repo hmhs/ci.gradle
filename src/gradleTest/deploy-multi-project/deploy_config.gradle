@@ -4,6 +4,8 @@ allprojects {
 
   ext {
     libertyVersion = project.property("libertyVersion")
+    libertyDlRoot = project.property("liberty_dl_root")
+
     wlpServerName = 'libertyOnline'
   }
 
@@ -50,8 +52,7 @@ project(':app-liberty'){
 
   liberty {
     install {
-      //runtimeUrl = "http://repo1.maven.org/maven2/com/ibm/websphere/appserver/runtime/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
-      runtimeUrl = "https://artifactory.highmark.com/artifactory/dist/websphere/liberty/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
+      runtimeUrl = "${libertyDlRoot}/wlp-webProfile7/${libertyVersion}/wlp-webProfile7-${libertyVersion}.zip"
     }
 
     server {
